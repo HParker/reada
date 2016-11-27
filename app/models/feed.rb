@@ -1,4 +1,32 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: feeds
+#
+#  id                :uuid             not null, primary key
+#  etag              :string
+#  url               :string
+#  feed_url          :string
+#  links             :text
+#  title             :string
+#  description       :string
+#  language          :string
+#  itunes_author     :string
+#  itunes_image      :string
+#  itunes_summary    :string
+#  itunes_subtitle   :string
+#  itunes_explicit   :string
+#  itunes_keywords   :string
+#  itunes_owners     :string
+#  itunes_categories :string
+#  last_fetched      :datetime
+#  status            :integer          default("success"), not null
+#  group_id          :integer
+#  last_modified     :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 require 'uri'
 
 class Feed < ApplicationRecord

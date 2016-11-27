@@ -1,4 +1,35 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: stories
+#
+#  id               :uuid             not null, primary key
+#  title            :text
+#  content          :text
+#  author           :string
+#  summary          :string
+#  links            :text
+#  url              :string
+#  entry_id         :text
+#  updated          :datetime
+#  published        :datetime
+#  enclosure_url    :string
+#  enclosure_length :string
+#  enclosure_type   :string
+#  itunes_author    :string
+#  itunes_image     :string
+#  itunes_duration  :string
+#  itunes_summary   :string
+#  itunes_subtitle  :string
+#  itunes_explicit  :string
+#  feed_id          :uuid
+#  permalink        :string
+#  read             :boolean          default(FALSE), not null
+#  starred          :boolean          default(FALSE), not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Story < ApplicationRecord
   belongs_to :feed
 
