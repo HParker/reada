@@ -1,0 +1,9 @@
+
+<div class="container">
+  <section>
+  <%= simple_form_for @feed do |f| %>
+    <%= f.input :url, as: :string %>
+    <%= f.button :submit %>
+  <% end %>
+  </section>
+</div>

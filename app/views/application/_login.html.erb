@@ -1,0 +1,5 @@
+<% if current_user.persisted? %>
+  <%= link_to current_user.name, current_user %>
+<% else %>
+  <%= link_to 'Login', '/auth/google_oauth2' %>
+<% end %>

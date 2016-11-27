@@ -1,0 +1,17 @@
+<table class="table-minimal">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Articles</th>
+      <th>Status</th>
+    </tr>
+    <% @feeds.each do |feed| %>
+      <tr>
+
+        <td><%= feed.title %></td>
+        <td><%= feed.stories.count %></td>
+        <td><span class="badge-<%= feed.status %>"><%= feed.status%></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

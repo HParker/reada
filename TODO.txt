@@ -1,0 +1,6 @@
+* Refresh feeds
+* Handle plural feed data like `links`
+* Capture complete xml data? Mirror feed response?
+* Search
+* AMP pages
+* Sitemap

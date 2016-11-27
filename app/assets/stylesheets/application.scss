@@ -1,0 +1,13 @@
+@import "bourbon";
+@import "neat/neat";
+@import "base/base";
+@import "refills/navigation";
+@import "refills/tables-minimal";
+@import "refills/flashes";
+@import "refills/badges";
+@import "font-awesome";
+@import "forms";
+body {
+    margin: 0;
+    padding: 0;
+}

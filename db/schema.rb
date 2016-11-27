@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,53 +11,96 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125163420) do
-
+ActiveRecord::Schema.define(version: 20_161_125_211_602) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
+  enable_extension 'uuid-ossp'
 
-  create_table "authorizations", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'authorizations', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|
+    t.string   'provider'
+    t.string   'uid'
+    t.integer  'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "feeds", force: :cascade do |t|
-    t.string   "name"
-    t.text     "url"
-    t.datetime "last_fetched"
-    t.integer  "status"
-    t.integer  "group_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table 'delayed_jobs', force: :cascade do |t|
+    t.integer  'priority',   default: 0, null: false
+    t.integer  'attempts',   default: 0, null: false
+    t.text     'handler',                null: false
+    t.text     'last_error'
+    t.datetime 'run_at'
+    t.datetime 'locked_at'
+    t.datetime 'failed_at'
+    t.string   'locked_by'
+    t.string   'queue'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
+    t.index %w(priority run_at), name: 'delayed_jobs_priority', using: :btree
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'feeds', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|
+    t.string   'etag'
+    t.string   'url'
+    t.string   'feed_url'
+    t.text     'links'
+    t.string   'title'
+    t.string   'description'
+    t.string   'language'
+    t.string   'itunes_author'
+    t.string   'itunes_image'
+    t.string   'itunes_summary'
+    t.string   'itunes_subtitle'
+    t.string   'itunes_explicit'
+    t.string   'itunes_keywords'
+    t.string   'itunes_owners'
+    t.string   'itunes_categories'
+    t.datetime 'last_fetched'
+    t.integer  'status'
+    t.integer  'group_id'
+    t.datetime 'last_modified'
+    t.datetime 'created_at',        null: false
+    t.datetime 'updated_at',        null: false
   end
 
-  create_table "stories", force: :cascade do |t|
-    t.text     "title"
-    t.text     "permalink"
-    t.text     "body"
-    t.integer  "feed_id"
-    t.datetime "published"
-    t.boolean  "read"
-    t.boolean  "starred"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'groups', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|
+    t.string   'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'stories', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|
+    t.text     'content'
+    t.string   'author'
+    t.text     'title'
+    t.string   'summary'
+    t.text     'links'
+    t.string   'url'
+    t.text     'entry_id'
+    t.string   'permalink'
+    t.datetime 'updated'
+    t.datetime 'published'
+    t.string   'enclosure_url'
+    t.string   'enclosure_length'
+    t.string   'enclosure_type'
+    t.string   'itunes_author'
+    t.string   'itunes_image'
+    t.string   'itunes_duration'
+    t.string   'itunes_summary'
+    t.string   'itunes_subtitle'
+    t.string   'itunes_explicit'
+    t.uuid     'feed_id'
+    t.boolean  'read'
+    t.boolean  'starred'
+    t.datetime 'created_at',       null: false
+    t.datetime 'updated_at',       null: false
   end
 
+  create_table 'users', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|
+    t.string   'name'
+    t.string   'email'
+    t.string   'image_url'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
 end

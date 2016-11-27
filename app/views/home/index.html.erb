@@ -1,0 +1,10 @@
+<table class="table-minimal">
+  <tbody>
+    <% @stories.each do |story| %>
+      <tr>
+        <td><b><%= link_to story.title, story %></b></td>
+        <td><%= story.feed.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
