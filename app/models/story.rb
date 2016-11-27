@@ -12,7 +12,12 @@ class Story < ApplicationRecord
 
   def self.process_params(create_params)
     create_params.each_with_object({}) do |(key, val), hash|
-      hash[key] = Array(val).join("\n") if val
+      hash[key] =
+        if val.respond_to?(:join)
+          val.join("\n")
+        else
+          val
+        end
     end
   end
   private_class_method :process_params

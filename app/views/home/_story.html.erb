@@ -1,0 +1,5 @@
+<tr>
+  <td><b><%= link_to truncate(story.title, length: 40), story %></b></td>
+  <td><%= link_to story.feed.title, story.feed %></td>
+  <td><%= story.published.to_formatted_s(:long) %></td>
+</tr>

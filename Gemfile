@@ -33,6 +33,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'web-console'
   gem 'refills'
+  gem 'annotate'
 end
 
 group :development, :test do

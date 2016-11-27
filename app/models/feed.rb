@@ -22,7 +22,12 @@ class Feed < ApplicationRecord
 
   def process_params(create_params)
     create_params.each_with_object({}) do |(key, val), hash|
-      hash[key] = Array(val).join("\n") if val
+      hash[key] =
+        if val.respond_to?(:join)
+          val.join("\n")
+        else
+          val
+        end
     end
   end
 

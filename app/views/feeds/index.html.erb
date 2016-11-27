@@ -7,8 +7,7 @@
     </tr>
     <% @feeds.each do |feed| %>
       <tr>
-
-        <td><%= feed.title %></td>
+        <td><%= link_to feed.title, feed %></td>
         <td><%= feed.stories.count %></td>
         <td><span class="badge-<%= feed.status %>"><%= feed.status%></span></td>
       </tr>

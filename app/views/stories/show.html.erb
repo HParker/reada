@@ -1,11 +1,10 @@
 <div class="read-port">
-  <%= @story.as_json.keys %>
   <h1>
     <%= @story.title %>
     <%= link_to_if(@story.url.present?, fa_icon("external-link"), @story.url) %>
   </h1>
   <sub>
-    <%= @story.author.capitalize %> | <%= @story.published.to_formatted_s(:long) %>
+    <%= @story.author.capitalize %> | <%= @story&.published&.to_formatted_s(:long) %>
   </sub>
 
   <% if @story.enclosure_url %>

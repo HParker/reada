@@ -1,1 +1,23 @@
-<h1><%= @feed.url %></h1>
+<div>
+  <h1>
+    <%= @feed.title %>
+    <%= link_to_if(@feed.url.present?, fa_icon("external-link"), @feed.url) %>
+  </h1>
+  <sub>
+    Updated: <%= time_ago_in_words(@feed.last_modified) if @feed.last_modified %>
+  </sub>
+  <p>
+    <%= @feed.description %>
+  </p>
+
+  <h2>
+    Stories:
+  </h2>
+  <table class="table-minimal">
+    <tbody>
+      <% @feed.stories.each do |story| %>
+        <%= render 'home/story', story: story %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

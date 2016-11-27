@@ -31,7 +31,7 @@ class CreateStories < ActiveRecord::Migration[5.0]
       t.string :itunes_explicit
 
       # internal
-      t.uuid :feed_id, null: false
+      t.uuid :feed_id
       t.string :permalink
       t.boolean :read, default: false, null: false
       t.boolean :starred, default: false, null: false
