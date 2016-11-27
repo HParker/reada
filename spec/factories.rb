@@ -23,10 +23,10 @@ FactoryGirl.define do
     name 'MyString'
   end
   factory :feed do
-    name 'MyString'
+    title 'MyString'
     url 'MyText'
     last_fetched '2016-11-25 08:27:20'
-    status 1
+    status 0
     group_id 1
   end
 end

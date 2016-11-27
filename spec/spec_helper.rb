@@ -10,7 +10,14 @@ if ENV.fetch('COVERAGE', false)
   SimpleCov.start 'rails'
 end
 
+require 'vcr'
 require 'webmock/rspec'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/cassettes"
+  config.hook_into :webmock # or :fakeweb
+  config.allow_http_connections_when_no_cassette = false
+end
 
 # http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

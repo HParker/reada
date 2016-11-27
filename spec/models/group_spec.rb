@@ -1,6 +1,8 @@
 # frozen_string_literal: true
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Group, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'it exists' do
+    it { expect{ FactoryGirl.create(:group) }.not_to raise_error }
+  end
 end

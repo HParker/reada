@@ -293,6 +293,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.1)
     uniform_notifier (1.10.0)
+    vcr (3.0.3)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -357,6 +358,7 @@ DEPENDENCIES
   timecop
   title
   uglifier
+  vcr
   web-console
   webmock
 

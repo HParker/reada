@@ -8,21 +8,23 @@ class Feed < ApplicationRecord
   validate :valid_feed
   after_commit :async_fetch, on: :create
 
+  enum status: [:success, :notice, :alert]
+
   def with_xml(feed_xml)
     create_params = feed_xml.as_json.select do |key, _value|
       self.class.new.attributes.keys.include?(key)
     end
-    assign_attributes(create_params)
-  end
-
-  STATUS = { success: 0, notice: 1, alert: 2 }.freeze
-
-  def status
-    # TODO: default this field
-    STATUS.key(read_attribute(:status)) || 'success'
+    assign_attributes(process_params(create_params))
+    self
   end
 
   private
+
+  def process_params(create_params)
+    create_params.each_with_object({}) do |(key, val), hash|
+      hash[key] = Array(val).join("\n") if val
+    end
+  end
 
   def async_fetch
     feed = parser.fetch_and_parse(url)

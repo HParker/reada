@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Authorization, type: :model do
   describe '.from_auth_hash' do
