@@ -1,4 +1,6 @@
-<div>
+<%= render 'layouts/header', resource: @feed, start_color: @start_color, end_color: @end_color %>
+
+<div class="container">
   <h1>
     <%= @feed.title %>
     <%= link_to_if(@feed.url.present?, fa_icon("external-link"), @feed.url) %>

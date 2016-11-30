@@ -15,7 +15,9 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @feed = Feed.find(params[:id])
+    @feed = resource
+    @start_color = start_color
+    @end_color = end_color
   end
 
   def index
@@ -26,5 +28,9 @@ class FeedsController < ApplicationController
 
   def feed_params
     params.require(:feed).permit(:url)
+  end
+
+  def resource
+    Feed.find(params[:id])
   end
 end

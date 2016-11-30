@@ -1,0 +1,12 @@
+<div class="image-gradient-dynamic">
+  <div class="overlay" id="topper"></div>
+  <% if resource.itunes_image %>
+    <div class="logo">
+      <%= image_tag resource.itunes_image %>
+    </div>
+  <% end %>
+</div>
+<script>
+ var x = document.getElementById("topper");
+ x.style.backgroundImage = "linear-gradient(15deg, <%= start_color %>, <%= end_color %>)";
+</script>

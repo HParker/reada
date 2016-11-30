@@ -1,2 +1,10 @@
-<h1>Stories#index</h1>
-<p>Find me in app/views/stories/index.html.erb</p>
+<div class="container">
+  <table class="table-minimal">
+    <tbody>
+      <% @stories.each do |story| %>
+        <%= render 'home/story', story: story %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= render 'refills/pagination', resources: @stories %>
+</div>

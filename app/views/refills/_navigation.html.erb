@@ -1,12 +1,13 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
     <%= link_to root_path, class: 'logo' do%>
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_square.png" alt="Logo Image">
+      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <% end %>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><%= link_to 'Reada', root_path %></li>
-        <li class="nav-link"><%= link_to 'Feeds', feeds_path %></li>
+        <li class="nav-link logo"><%= link_to 'Reada', root_path %></li>
+        <li class="nav-link"><%= link_to 'Podcasts', feeds_path %></li>
+        <li class="nav-link"><%= link_to 'Shows', stories_path %></li>
         <li class="nav-link"><%= link_to '+', new_feed_path %></li>
       </ul>
     </nav>
@@ -20,7 +21,7 @@
         </form>
       </div>
       <nav role="navigation">
-        <ul id="js-navigation-menu" class="navigation-menu show">
+        <ul class="navigation-menu show">
           <li class="nav-link"><%= render 'login' %></li>
         </ul>
       </nav>

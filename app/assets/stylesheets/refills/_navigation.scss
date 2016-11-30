@@ -271,7 +271,7 @@ header.navigation {
   // Elements on the far right
 
   .navigation-tools {
-    background: #505050;
+    background: darken($navigation-background, 3%);
     clear: both;
     display: block;
     height: $navigation-height;

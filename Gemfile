@@ -26,6 +26,8 @@ gem 'bourbon'
 gem 'feedjira'
 gem 'feedbag'
 gem 'font-awesome-rails'
+gem 'miro'
+gem 'kaminari'
 
 group :development do
   gem 'listen'

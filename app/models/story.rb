@@ -41,6 +41,10 @@ class Story < ApplicationRecord
     feed
   end
 
+  def author
+    read_attribute(:author) || read_attribute(:itunes_author)
+  end
+
   def self.process_params(create_params)
     create_params.each_with_object({}) do |(key, val), hash|
       hash[key] =

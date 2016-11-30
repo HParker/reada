@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="ROBOTS" content="NOODP" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <%#
     Configure default and controller-, and view-specific titles in
@@ -16,9 +15,8 @@
 <body class="<%= body_class %>">
   <%= render 'refills/navigation' %>
   <%= render 'flashes' -%>
-  <div class="container">
-    <%= yield %>
-  </div>
+  <%= yield %>
+  <%= render 'refills/footer' %>
   <%= render "javascript" %>
   <%= render "css_overrides" %>
 </body>

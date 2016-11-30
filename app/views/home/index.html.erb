@@ -1,7 +1,4 @@
-<table class="table-minimal">
-  <tbody>
-    <% @stories.each do |story| %>
-      <%= render 'story', story: story %>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <%= render 'refills/cards', resources: @casts %>
+  <%= render 'refills/pagination', resources: @casts %>
+</div>
