@@ -29,6 +29,10 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+# Indexes
+#
+#  index_stories_on_feed_id  (feed_id)
+#
 
 class Story < ApplicationRecord
   belongs_to :feed

@@ -3,7 +3,7 @@
 <div class="container">
   <h1>
     <%= @feed.title %>
-    <%= link_to_if(@feed.url.present?, fa_icon("external-link"), @feed.url) %>
+    <%#= link_to_if(@feed.url.present?, fa_icon("external-link"), @feed.url) %>
   </h1>
   <sub>
     Updated: <%= time_ago_in_words(@feed.last_modified) if @feed.last_modified %>
@@ -13,12 +13,14 @@
   </p>
 
   <h2>
-    Stories:
+    Shows:
   </h2>
   <table class="table-minimal">
     <tbody>
       <% @feed.stories.each do |story| %>
-        <%= render 'home/story', story: story %>
+        <% cache story do %>
+          <%= render 'home/story', story: story %>
+        <% end %>
       <% end %>
     </tbody>
   </table>

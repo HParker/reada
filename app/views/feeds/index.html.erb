@@ -3,15 +3,17 @@
     <tbody>
       <tr>
         <th>Name</th>
-        <th>Articles</th>
+        <th>Shows</th>
         <th>Status</th>
       </tr>
       <% @feeds.each do |feed| %>
-        <tr>
-          <td><%= link_to feed.title, feed %></td>
-          <td><%= feed.stories.count %></td>
-          <td><span class="badge-<%= feed.status %>"><%= feed.status%></span></td>
-        </tr>
+        <% cache feed do %>
+          <tr>
+            <td><%= link_to feed.title, feed %></td>
+            <td><%= feed.stories.count %></td>
+            <td><span class="badge-<%= feed.status %>"><%= feed.status%></span></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

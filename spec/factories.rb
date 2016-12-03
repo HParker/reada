@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 FactoryGirl.define do
+  factory :follow do
+    user_id 1
+    feed_id 1
+  end
   factory :user do
     name 'MyString'
     email 'MyString'

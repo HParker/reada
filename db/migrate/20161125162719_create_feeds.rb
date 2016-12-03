@@ -25,7 +25,7 @@ class CreateFeeds < ActiveRecord::Migration[5.0]
       # internal
       t.datetime :last_fetched
       t.integer :status, default: 0, null: false
-      t.integer :group_id
+      t.uuid :group_id, index: true
 
       t.datetime :last_modified
       t.timestamps

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125211602) do
+ActiveRecord::Schema.define(version: 20161130061221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20161125211602) do
   create_table "authorizations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "provider",   null: false
     t.string   "uid",        null: false
-    t.integer  "user_id",    null: false
+    t.uuid     "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authorizations_on_user_id", using: :btree
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -57,16 +58,30 @@ ActiveRecord::Schema.define(version: 20161125211602) do
     t.string   "itunes_categories"
     t.datetime "last_fetched"
     t.integer  "status",            default: 0, null: false
-    t.integer  "group_id"
+    t.uuid     "group_id"
     t.datetime "last_modified"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.index ["group_id"], name: "index_feeds_on_group_id", using: :btree
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.uuid     "user"
+    t.uuid     "feed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_follows_on_feed_id", using: :btree
+    t.index ["user"], name: "index_follows_on_user", using: :btree
   end
 
   create_table "groups", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name",       null: false
+    t.uuid     "user_id"
+    t.uuid     "feed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_groups_on_feed_id", using: :btree
+    t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
   end
 
   create_table "stories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -94,6 +109,7 @@ ActiveRecord::Schema.define(version: 20161125211602) do
     t.boolean  "starred",          default: false, null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.index ["feed_id"], name: "index_stories_on_feed_id", using: :btree
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

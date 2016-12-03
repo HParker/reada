@@ -1,17 +1,19 @@
 <div class="cards">
   <% resources.each do |resource| %>
-    <div class="card">
-      <%= link_to resource do %>
-        <div class="card-image">
-          <%= image_tag resource.itunes_image %>
-        </div>
-        <div class="card-header">
-          <%= resource.title %>
-        </div>
-        <div class="card-copy">
-          <%= truncate(resource.itunes_summary, length: 200) %>
-        </div>
-    </div>
-      <% end %>
+    <% cache resource do %>
+      <div class="card">
+        <%= link_to resource do %>
+          <div class="card-image">
+            <%= image_tag resource.itunes_image %>
+          </div>
+          <div class="card-header">
+            <%= resource.title %>
+          </div>
+          <div class="card-copy">
+            <%= truncate(resource.itunes_summary, length: 200) %>
+          </div>
+      </div>
+        <% end %>
+    <% end %>
   <% end %>
 </div>

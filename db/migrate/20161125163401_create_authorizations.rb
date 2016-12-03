@@ -4,7 +4,7 @@ class CreateAuthorizations < ActiveRecord::Migration[5.0]
     create_table :authorizations, id: :uuid do |t|
       t.string :provider, null: false
       t.string :uid, null: false
-      t.integer :user_id, null: false
+      t.uuid :user_id, null: false, index: true
 
       t.timestamps
     end

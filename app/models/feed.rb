@@ -21,10 +21,14 @@
 #  itunes_categories :string
 #  last_fetched      :datetime
 #  status            :integer          default("success"), not null
-#  group_id          :integer
+#  group_id          :uuid
 #  last_modified     :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_feeds_on_group_id  (group_id)
 #
 
 require 'uri'
