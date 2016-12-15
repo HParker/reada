@@ -1,20 +1,20 @@
 # == Schema Information
 #
-# Table name: follows
+# Table name: marks
 #
 #  id         :integer          not null, primary key
 #  user_id    :uuid
-#  feed_id    :uuid
+#  story_id   :uuid
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_follows_on_feed_id  (feed_id)
-#  index_follows_on_user_id  (user_id)
+#  index_marks_on_story_id  (story_id)
+#  index_marks_on_user_id   (user_id)
 #
 
-class Follow < ApplicationRecord
+class Mark < ApplicationRecord
   belongs_to :user
-  belongs_to :feed
+  belongs_to :story
 end

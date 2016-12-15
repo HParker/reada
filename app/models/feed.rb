@@ -22,6 +22,7 @@
 #  last_fetched      :datetime
 #  status            :integer          default("success"), not null
 #  group_id          :uuid
+#  latest_dump       :text
 #  last_modified     :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -35,6 +36,7 @@ require 'uri'
 
 class Feed < ApplicationRecord
   has_many :stories
+  has_many :follows
 
   validates :url, presence: true
   validate :valid_feed
@@ -42,25 +44,45 @@ class Feed < ApplicationRecord
 
   enum status: [:success, :notice, :alert]
 
-  def with_xml(feed_xml)
-    create_params = feed_xml.as_json.select do |key, _value|
-      self.class.new.attributes.keys.include?(key)
+  def follow_action(user)
+    if following?(user)
+      "unfollow"
+    else
+      "follow"
     end
-    assign_attributes(process_params(create_params))
-    self
   end
 
-  private
-
-  def process_params(create_params)
-    create_params.each_with_object({}) do |(key, val), hash|
-      hash[key] =
-        if val.respond_to?(:join)
-          val.join("\n")
-        else
-          val
-        end
+  def toggle_follow!(user)
+    if following?(user)
+      follows.find_by(user: user).destroy!
+    else
+      follows.create!(user: user) if user.persisted?
     end
+  end
+
+  def following?(user)
+    follows.where(user_id: user.id).any?
+  end
+
+  def display_title
+    title || URI::parse(url).path
+  end
+
+  def display_image
+    itunes_image || "placeholder.png"
+  end
+
+  def display_modified
+    if last_modified
+      ActionController::Base.helpers.time_ago_in_words(last_modified)
+    else
+      "No data yet"
+    end
+  end
+
+  def with_xml(feed_xml)
+    assign_attributes(create_params(feed_xml))
+    self
   end
 
   def async_fetch
@@ -73,6 +95,32 @@ class Feed < ApplicationRecord
     save!
   end
   handle_asynchronously :async_fetch
+
+  def fetched_at
+    last_fetched || 1.year.ago
+  end
+
+  private
+
+  def create_params(feed_xml)
+    attribute_names = self.class.new.attributes.keys
+
+    create_params = feed_xml.as_json.select do |key, _value|
+      attribute_names.include?(key)
+    end
+    process_params(create_params).merge(latest_dump: feed_xml.to_yaml, last_fetched: Time.now)
+  end
+
+  def process_params(create_params)
+    create_params.each_with_object({}) do |(key, val), hash|
+      hash[key] =
+        if val.respond_to?(:join)
+          val.join("\n")
+        else
+          val
+        end
+    end
+  end
 
   def valid_feed
     return if finder.feed?(url)

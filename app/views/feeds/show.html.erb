@@ -1,27 +1,45 @@
 <%= render 'layouts/header', resource: @feed, start_color: @start_color, end_color: @end_color %>
 
 <div class="container">
-  <h1>
-    <%= @feed.title %>
-    <%#= link_to_if(@feed.url.present?, fa_icon("external-link"), @feed.url) %>
-  </h1>
-  <sub>
-    Updated: <%= time_ago_in_words(@feed.last_modified) if @feed.last_modified %>
-  </sub>
+  <div class="title">
+    <h1>
+      <%= @feed.display_title %>
+    </h1>
+  </div>
+  <% if current_user.persisted? %>
+    <div class="follow-button" align="right">
+      <button onclick="follow()" id="follow-button">
+        <%= @feed.follow_action(current_user) %>
+      </button>
+    </div>
+
+    <div class="follow-button" align="right">
+      <%= link_to feed_refresh_path(@feed) do %>
+      <button>
+        Refresh
+      </button>
+      <% end %>
+    </div>
+  <% end %>
+  <p>
+    Updated: <%= @feed.display_modified %>
+  </p>
   <p>
     <%= @feed.description %>
   </p>
 
-  <h2>
-    Shows:
-  </h2>
-  <table class="table-minimal">
-    <tbody>
-      <% @feed.stories.each do |story| %>
-        <% cache story do %>
-          <%= render 'home/story', story: story %>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render 'home/story', stories: @stories do %>
+    <h2>
+      Shows:
+    </h2>
+  <% end %>
 </div>
+
+<script>
+ var followButton = document.getElementById('follow-button');
+ var follow = function() {
+   $.post("<%= feed_follow_path(@feed) %>", function(data, status){
+        followButton.textContent = data;
+      });
+ }
+</script>

@@ -1,5 +1,23 @@
-<tr>
-  <td><b><%= link_to truncate(story.title, length: 40), story %></b></td>
-  <td><%= link_to story.feed.title, story.feed %></td>
-  <td><%= story.published.to_formatted_s(:long) %></td>
-</tr>
+<% unless stories.none? %>
+  <%= yield if block_given? %>
+
+  <table class="table-minimal">
+    <tbody>
+      <% stories.each do |story| %>
+        <% cache story do %>
+          <tr>
+            <td>
+              <% unless story.users.include?(current_user) %>
+                ⃝
+              <% end %>
+              <b><%= link_to truncate(story.title, length: 40), story %></b>
+            </td>
+            <td><%= link_to story.feed.title, story.feed %></td>
+            <td><%= story.published.to_formatted_s(:long) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= render 'refills/pagination', resources: stories %>
+<% end %>

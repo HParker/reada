@@ -1,6 +1,8 @@
 * Refresh feeds
-* Handle plural feed data like `links`
+* Handle hash data like author
 * Capture complete xml data? Mirror feed response?
 * Search
 * AMP pages
 * Sitemap
+
+https://robots.thoughtbot.com/feed

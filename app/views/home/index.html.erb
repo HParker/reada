@@ -1,4 +1,8 @@
 <div class="container">
-  <%= render 'refills/cards', resources: @casts %>
-  <%= render 'refills/pagination', resources: @casts %>
+  <% unless @casts.empty? %>
+    <%= render 'refills/cards', resources: @casts %>
+    <%= render 'refills/pagination', resources: @casts %>
+  <% else %>
+    <h1>You are not currently following any podcasts <%= link_to "Find One", explore_index_path %>.</h1>
+  <% end %>
 </div>

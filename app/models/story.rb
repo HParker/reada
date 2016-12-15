@@ -35,14 +35,24 @@
 #
 
 class Story < ApplicationRecord
+  has_many :marks
+  has_many :users, through: :marks
   belongs_to :feed
+
+  validates :entry_id, uniqueness: true
 
   def self.from_xml(entry, feed)
     create_params = entry.to_h.select do |key, _value|
       allowed_params.include?(key)
     end
-    feed.stories.new(process_params(create_params))
+    feed.stories
+      .find_or_initialize_by(entry_id: entry.entry_id)
+      .assign_attributes(process_params(create_params))
     feed
+  end
+
+  def marked?(user)
+    marks.where(user_id: user.id).any?
   end
 
   def author

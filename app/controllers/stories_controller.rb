@@ -4,10 +4,13 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @start_color = start_color
     @end_color = end_color
+    if current_user.persisted?
+      @story.marks.create!(user: current_user)
+    end
   end
 
   def index
-    @stories = Story.includes(:feed).order(published: :desc).page params[:page]
+    @stories = current_user.stories.includes(:feed).order(published: :desc).page(params[:page])
   end
 
   private

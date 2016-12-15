@@ -32,8 +32,17 @@
 
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  get 'explore/index'
+
+  get 'explore/show'
+
   resources :users, only: [:show]
-  resources :feeds
+  resources :feeds do
+    post :follow
+    post :unfollow
+    get :refresh
+  end
+
   resources :stories
 
   root to: 'home#index'

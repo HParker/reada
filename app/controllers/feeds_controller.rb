@@ -16,12 +16,27 @@ class FeedsController < ApplicationController
 
   def show
     @feed = resource
+    @stories = @feed.stories.eager_load(:users).order(published: :desc).page(params[:page])
     @start_color = start_color
     @end_color = end_color
   end
 
   def index
-    @feeds = Feed.all
+    @feeds = current_user.feeds.page(params[:page])
+  end
+
+  # NONCRUD
+
+  def follow
+    feed = Feed.find(params[:feed_id])
+    feed.toggle_follow!(current_user)
+    render plain: feed.reload.follow_action(current_user)
+  end
+
+  def refresh
+    feed = Feed.find(params[:feed_id])
+    feed.async_fetch if feed.fetched_at < 2.minutes.ago
+    redirect_to feed
   end
 
   private

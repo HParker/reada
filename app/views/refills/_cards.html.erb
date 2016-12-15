@@ -4,10 +4,10 @@
       <div class="card">
         <%= link_to resource do %>
           <div class="card-image">
-            <%= image_tag resource.itunes_image %>
+            <%= image_tag resource.display_image %>
           </div>
           <div class="card-header">
-            <%= resource.title %>
+            <%= resource.display_title %>
           </div>
           <div class="card-copy">
             <%= truncate(resource.itunes_summary, length: 200) %>

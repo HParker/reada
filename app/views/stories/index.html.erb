@@ -1,10 +1,8 @@
 <div class="container">
-  <table class="table-minimal">
-    <tbody>
-      <% @stories.each do |story| %>
-        <%= render 'home/story', story: story %>
-      <% end %>
-    </tbody>
-  </table>
-  <%= render 'refills/pagination', resources: @stories %>
+  <% unless @stories.empty? %>
+    <%= render 'home/story', stories: @stories %>
+    <%= render 'refills/pagination', resources: @stories %>
+  <% else %>
+    <h1>You are not currently following any podcasts <%= link_to "Find One", explore_index_path %>.</h1>
+  <% end %>
 </div>
