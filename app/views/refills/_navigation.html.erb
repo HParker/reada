@@ -9,19 +9,11 @@
         <li class="nav-link"><%= link_to 'Podcasts', feeds_path %></li>
         <li class="nav-link"><%= link_to 'Shows', stories_path %></li>
         <li class="nav-link"><%= link_to 'Explore', explore_index_path %></li>
-        <li class="nav-link"><%= link_to '+', new_feed_path %></li>
+        <% if current_user.admin? %>
+          <li class="nav-link"><%= link_to '+', new_feed_path %></li>
+        <% end %>
         <li class="nav-link"><%= render 'login' %></li>
       </ul>
     </nav>
-    <div class="navigation-tools">
-      <div class="search-bar">
-        <form role="search">
-          <input type="search" placeholder="Enter Search" />
-          <button type="submit">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
-          </button>
-        </form>
-      </div>
-    </div>
   </div>
 </header>

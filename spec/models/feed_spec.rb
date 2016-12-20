@@ -11,8 +11,8 @@ RSpec.describe Feed, type: :model do
 
   describe '#with_xml' do
     before { subject.with_xml(feed_xml) }
-    it { expect(subject.etag).to eq('393e-53e4757c9db00-gzip') }
-    it { expect(subject.title).to eq('Feedjira Blog') }
+    it { expect(subject.etag).to eq('"393e-53e4757c9db00-gzip"') }
+    it { expect(subject.title).to eq('"Feedjira Blog"') }
     it { expect(subject.language).to be_nil }
   end
 end

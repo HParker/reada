@@ -1,6 +1,4 @@
-* Refresh feeds
 * Handle hash data like author
-* Capture complete xml data? Mirror feed response?
 * Search
 * AMP pages
 * Sitemap

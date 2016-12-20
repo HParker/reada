@@ -114,8 +114,8 @@ class Feed < ApplicationRecord
   def process_params(create_params)
     create_params.each_with_object({}) do |(key, val), hash|
       hash[key] =
-        if val.respond_to?(:join)
-          val.join("\n")
+        if val.respond_to?(:to_json)
+          val.to_json
         else
           val
         end
