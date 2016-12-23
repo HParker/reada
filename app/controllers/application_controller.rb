@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       if resource.itunes_image
         Miro::DominantColors.new(resource.itunes_image).to_rgb
       else
-        [[174, 147, 74], [0,128,128]]
+        [[174, 147, 74], [0, 128, 128]]
       end
   end
 

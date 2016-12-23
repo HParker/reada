@@ -1,5 +1,8 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Follow, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'it exists' do
+    it { expect { FactoryGirl.create(:follow) }.not_to raise_error }
+  end
 end

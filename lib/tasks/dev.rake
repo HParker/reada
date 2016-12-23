@@ -12,9 +12,4 @@ if Rails.env.development? || Rails.env.test?
       # create(:user, email: "user@example.com", password: "password")
     end
   end
-
-  RuboCop::RakeTask.new(:rubocop) do |t|
-    t.options = ['--display-cop-names']
-  end
-  task default: :rubocop
 end

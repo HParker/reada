@@ -2,19 +2,18 @@
 require 'spec_helper'
 
 RSpec.describe Story, type: :model do
-  let(:feed_xml) {
-    VCR.use_cassette("feedjira") do
+  let(:feed_xml) do
+    VCR.use_cassette('feedjira') do
       url = 'http://feedjira.com/blog/feed.xml'
-    Feedjira::Feed.fetch_and_parse(url).entries.first
+      Feedjira::Feed.fetch_and_parse(url).entries.first
     end
+  end
 
-  }
-
-  let(:feed) {
-    VCR.use_cassette("getafeedjira") do
+  let(:feed) do
+    VCR.use_cassette('getafeedjira') do
       FactoryGirl.create(:feed, url: 'http://feedjira.com/blog/feed.xml')
     end
-  }
+  end
 
   describe '.from_xml' do
     subject { described_class.from_xml(feed_xml, feed).stories.first }

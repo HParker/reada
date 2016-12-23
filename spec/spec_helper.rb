@@ -14,7 +14,7 @@ require 'vcr'
 require 'webmock/rspec'
 
 VCR.configure do |config|
-  config.cassette_library_dir = "spec/cassettes"
+  config.cassette_library_dir = 'spec/cassettes'
   config.hook_into :webmock # or :fakeweb
   config.allow_http_connections_when_no_cassette = false
 end

@@ -46,9 +46,9 @@ class Feed < ApplicationRecord
 
   def follow_action(user)
     if following?(user)
-      "unfollow"
+      'unfollow'
     else
-      "follow"
+      'follow'
     end
   end
 
@@ -65,18 +65,18 @@ class Feed < ApplicationRecord
   end
 
   def display_title
-    title || URI::parse(url).path
+    title || URI.parse(url).path
   end
 
   def display_image
-    itunes_image || "placeholder.png"
+    itunes_image || 'placeholder.png'
   end
 
   def display_modified
     if last_modified
       ActionController::Base.helpers.time_ago_in_words(last_modified)
     else
-      "No data yet"
+      'No data yet'
     end
   end
 
@@ -108,7 +108,7 @@ class Feed < ApplicationRecord
     create_params = feed_xml.as_json.select do |key, _value|
       attribute_names.include?(key)
     end
-    process_params(create_params).merge(latest_dump: feed_xml.to_yaml, last_fetched: Time.now)
+    process_params(create_params).merge(latest_dump: feed_xml.to_yaml, last_fetched: Time.current)
   end
 
   def process_params(create_params)
@@ -124,7 +124,8 @@ class Feed < ApplicationRecord
 
   def valid_feed
     return if finder.feed?(url)
-    if urls = finder.find(url)
+    urls = finder.find(url)
+    if urls
       self.url = urls.first
     else
       errors.add(:url, 'Could not find a feed at that url')

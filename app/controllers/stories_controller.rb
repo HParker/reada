@@ -4,9 +4,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @start_color = start_color
     @end_color = end_color
-    if current_user.persisted?
-      @story.marks.create!(user: current_user)
-    end
+    @story.marks.create!(user: current_user) if current_user.persisted?
   end
 
   def index

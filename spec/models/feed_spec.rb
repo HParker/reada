@@ -2,12 +2,12 @@
 require 'spec_helper'
 
 RSpec.describe Feed, type: :model do
-  let(:feed_xml) {
-    VCR.use_cassette("feedjira") do
+  let(:feed_xml) do
+    VCR.use_cassette('feedjira') do
       url = 'http://feedjira.com/blog/feed.xml'
       Feedjira::Feed.fetch_and_parse url
     end
-  }
+  end
 
   describe '#with_xml' do
     before { subject.with_xml(feed_xml) }

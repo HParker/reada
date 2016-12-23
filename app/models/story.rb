@@ -46,8 +46,8 @@ class Story < ApplicationRecord
       allowed_params.include?(key)
     end
     feed.stories
-      .find_or_initialize_by(entry_id: entry.entry_id)
-      .assign_attributes(process_params(create_params))
+        .find_or_initialize_by(entry_id: entry.entry_id)
+        .assign_attributes(process_params(create_params))
     feed
   end
 
@@ -56,7 +56,7 @@ class Story < ApplicationRecord
   end
 
   def author
-    read_attribute(:author) || read_attribute(:itunes_author)
+    self[:author] || self[:itunes_author]
   end
 
   def self.process_params(create_params)
