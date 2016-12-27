@@ -23,4 +23,8 @@ class NullUser
   def stories
     Story.all
   end
+
+  def admin?
+    false
+  end
 end

@@ -86,6 +86,11 @@ class Feed < ApplicationRecord
   end
 
   def async_fetch
+    fetch
+  end
+  handle_asynchronously :async_fetch
+
+  def fetch
     feed = parser.fetch_and_parse(url)
     with_xml(feed)
 
@@ -94,7 +99,6 @@ class Feed < ApplicationRecord
     end
     save!
   end
-  handle_asynchronously :async_fetch
 
   def fetched_at
     last_fetched || 1.year.ago
@@ -103,7 +107,7 @@ class Feed < ApplicationRecord
   private
 
   def create_params(feed_xml)
-    attribute_names = self.class.new.attributes.keys
+    attribute_names = self.class.new.attributes.keys - ["url"]
 
     create_params = feed_xml.as_json.select do |key, _value|
       attribute_names.include?(key)
@@ -127,7 +131,7 @@ class Feed < ApplicationRecord
     urls = finder.find(url)
     if urls
       self.url = urls.first
-    else
+      else
       errors.add(:url, 'Could not find a feed at that url')
     end
   rescue URI::InvalidURIError, Errno::ENOENT, Errno::ECONNREFUSED

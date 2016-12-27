@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.6.1
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    env_file: .env-production
+    command: bundle exec rails server --port=80 --binding=0.0.0.0
+    ports:
+      - "80:80"
+    links:
+      - db
+  worker:
+    build: .
+    env_file: .env-production
+    command: bundle exec rake jobs:work
+    links:
+      - db

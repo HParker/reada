@@ -2,7 +2,7 @@
   <div class="overlay" id="topper"></div>
   <% if resource.itunes_image %>
     <div class="logo">
-      <%= image_tag resource.itunes_image %>
+      <img src=<%= resource.itunes_image.gsub(/\A"|"\Z/, '') %> />
     </div>
   <% end %>
 </div>
