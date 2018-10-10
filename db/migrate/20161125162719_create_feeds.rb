@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateFeeds < ActiveRecord::Migration[5.0]
   def change
     create_table :feeds, id: :uuid do |t|

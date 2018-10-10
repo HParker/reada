@@ -2,5 +2,3 @@
 * Search
 * AMP pages
 * Sitemap
-
-https://robots.thoughtbot.com/feed

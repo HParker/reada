@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -20,7 +21,7 @@ class ApplicationController < ActionController::Base
     # calculate colors on save in the model
     @colors ||=
       if resource.itunes_image
-      # Miro::DominantColors.new(resource.itunes_image).to_rgb
+        # Miro::DominantColors.new(resource.itunes_image).to_rgb
         [[174, 147, 74], [0, 128, 128]]
       else
         [[174, 147, 74], [0, 128, 128]]

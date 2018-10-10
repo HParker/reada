@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: feeds
@@ -42,7 +43,7 @@ class Feed < ApplicationRecord
   validate :valid_feed
   after_commit :async_fetch, on: :create
 
-  enum status: [:success, :notice, :alert]
+  enum status: %i[success notice alert]
 
   def follow_action(user)
     if following?(user)
@@ -107,7 +108,7 @@ class Feed < ApplicationRecord
   private
 
   def create_params(feed_xml)
-    attribute_names = self.class.new.attributes.keys - ["url"]
+    attribute_names = self.class.new.attributes.keys - ['url']
 
     create_params = feed_xml.as_json.select do |key, _value|
       attribute_names.include?(key)
@@ -128,10 +129,11 @@ class Feed < ApplicationRecord
 
   def valid_feed
     return if finder.feed?(url)
+
     urls = finder.find(url)
     if urls
       self.url = urls.first
-      else
+    else
       errors.add(:url, 'Could not find a feed at that url')
     end
   rescue URI::InvalidURIError, Errno::ENOENT, Errno::ECONNREFUSED

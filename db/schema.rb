@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -37,7 +38,7 @@ ActiveRecord::Schema.define(version: 20_161_203_232_512) do
     t.string   'queue'
     t.datetime 'created_at'
     t.datetime 'updated_at'
-    t.index %w(priority run_at), name: 'delayed_jobs_priority', using: :btree
+    t.index %w[priority run_at], name: 'delayed_jobs_priority', using: :btree
   end
 
   create_table 'feeds', id: :uuid, default: -> { 'uuid_generate_v4()' }, force: :cascade do |t|

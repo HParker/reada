@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ExploreController < ApplicationController
   def index
     @casts = Feed.page(params[:page])

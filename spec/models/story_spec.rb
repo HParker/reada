@@ -1,17 +1,55 @@
 # frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: stories
+#
+#  id               :uuid             not null, primary key
+#  title            :text
+#  content          :text
+#  author           :string
+#  summary          :string
+#  links            :text
+#  url              :string
+#  entry_id         :text
+#  updated          :datetime
+#  published        :datetime
+#  enclosure_url    :string
+#  enclosure_length :string
+#  enclosure_type   :string
+#  itunes_author    :string
+#  itunes_image     :string
+#  itunes_duration  :string
+#  itunes_summary   :string
+#  itunes_subtitle  :string
+#  itunes_explicit  :string
+#  feed_id          :uuid
+#  permalink        :string
+#  read             :boolean          default(FALSE), not null
+#  starred          :boolean          default(FALSE), not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_stories_on_feed_id  (feed_id)
+#
+
 require 'spec_helper'
 
 RSpec.describe Story, type: :model do
   let(:feed_xml) do
     VCR.use_cassette('feedjira') do
       url = 'http://feedjira.com/blog/feed.xml'
-      Feedjira::Feed.fetch_and_parse(url).entries.first
+      xml = HTTParty.get(url).body
+      feed = Feedjira.parse(xml)
+      feed.entries.first
     end
   end
 
   let(:feed) do
     VCR.use_cassette('getafeedjira') do
-      FactoryGirl.create(:feed, url: 'http://feedjira.com/blog/feed.xml')
+      FactoryBot.create(:feed, url: 'http://feedjira.com/blog/feed.xml')
     end
   end
 

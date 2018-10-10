@@ -1,4 +1,21 @@
 # frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: authorizations
+#
+#  id         :uuid             not null, primary key
+#  provider   :string           not null
+#  uid        :string           not null
+#  user_id    :uuid             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_authorizations_on_user_id  (user_id)
+#
+
 require 'spec_helper'
 
 RSpec.describe Authorization, type: :model do
@@ -16,11 +33,11 @@ RSpec.describe Authorization, type: :model do
     end
 
     it 'finds and returns an existing authorization' do
-      FactoryGirl.create(
+      FactoryBot.create(
         :authorization,
         provider: 'twitter',
         uid: '123545',
-        user: FactoryGirl.create(:user)
+        user: FactoryBot.create(:user)
       )
       expect { described_class.from_auth_hash(twitter_auth_hash) }.to change(User, :count).by(0)
     end

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe StoriesController, type: :controller do
   describe 'GET #show' do
     it 'returns http success' do
-      story = FactoryGirl.create(:story)
+      story = FactoryBot.create(:story)
       get :show, params: { id: story.id }
       expect(response).to have_http_status(:success)
     end

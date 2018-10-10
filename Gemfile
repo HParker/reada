@@ -1,22 +1,21 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.5.1'
 
 gem 'autoprefixer-rails'
 gem 'delayed_job_active_record'
 gem 'flutie'
-gem 'honeybadger'
-gem 'jquery-rails'
-gem 'normalize-rails', '~> 3.0.0'
+gem 'normalize-rails'
 gem 'pg'
 gem 'puma'
 gem 'rack-canonical-host'
-gem 'rails', '~> 5.0.0'
+gem 'rails'
 gem 'recipient_interceptor'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'simple_form'
-gem 'sprockets', '>= 3.0.0'
+gem 'sprockets'
 gem 'suspenders'
 gem 'title'
 gem 'uglifier'
@@ -28,6 +27,7 @@ gem 'feedbag'
 gem 'font-awesome-rails'
 gem 'miro'
 gem 'kaminari'
+gem 'httparty'
 
 group :development do
   gem 'listen'
@@ -41,11 +41,13 @@ end
 group :development, :test do
   gem 'awesome_print'
   gem 'bullet'
-  gem 'bundler-audit', '>= 0.5.0', require: false
+  gem 'bundler-audit'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
-  gem 'rspec-rails', '~> 3.5.0.beta4'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'byebug'
 end
 
 group :development, :staging do
