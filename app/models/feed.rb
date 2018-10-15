@@ -66,7 +66,7 @@ class Feed < ApplicationRecord
   end
 
   def display_title
-    title || URI.parse(url).path
+    title || url
   end
 
   def display_image
@@ -92,7 +92,8 @@ class Feed < ApplicationRecord
   handle_asynchronously :async_fetch
 
   def fetch
-    feed = parser.fetch_and_parse(url)
+    xml = HTTParty.get(url).body
+    feed = Feedjira.parse(xml)
     with_xml(feed)
 
     feed.entries.each do |entry|
@@ -120,7 +121,7 @@ class Feed < ApplicationRecord
     create_params.each_with_object({}) do |(key, val), hash|
       hash[key] =
         if val.respond_to?(:to_json)
-          val.to_json
+          val
         else
           val
         end

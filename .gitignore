@@ -13,3 +13,10 @@
 /tmp/*
 .env
 .ctags
+/public/packs
+/public/packs-test
+/elm-stuff
+/node_modules
+yarn-debug.log*
+.yarn-integrity
+.env-bproduction

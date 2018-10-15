@@ -20,4 +20,15 @@ if defined? RSpec
   end
 end
 
+task :import_json => :environment do
+  json = JSON.parse(File.open("podcasts.json").read)
+  json["results"].each do |result|
+    puts result["feedUrl"]
+    feed = Feed.new(url: result["feedUrl"])
+    feed.save!
+  end
+
+end
+
+
 task default: 'bundler:audit'
