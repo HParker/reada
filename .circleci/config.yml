@@ -1,7 +1,7 @@
 orbs:
-  flog: hparker/flog@0.0.1
-  flay: hparker/flay@0.0.1
-  reek: hparker/reek@0.0.1
+  flog: hparker/flog@0.0.2
+  flay: hparker/flay@0.0.2
+  reek: hparker/reek@0.0.2
 
 version: 2.1
 
@@ -12,10 +12,7 @@ test:
 workflows:
   test:
     jobs:
-    - flog/flog:
-        options: ""
-    - flay/flay:
-        options: ""
-    - reek/reek:
-        options: ""
+    - flog/flog
+    - flay/flay
+    - reek/reek
   version: 2
