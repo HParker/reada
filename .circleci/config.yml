@@ -1,0 +1,21 @@
+orbs:
+  flog: hparker/flog@0.0.1
+  flay: hparker/flay@0.0.1
+  reek: hparker/reek@0.0.1
+
+version: 2.1
+
+test:
+    docker:
+      - image: rubylang/ruby:latest
+
+workflows:
+  test:
+    jobs:
+    - flog/flog:
+        options: ""
+    - flay/flay:
+        options: ""
+    - reek/reek:
+        options: ""
+  version: 2
