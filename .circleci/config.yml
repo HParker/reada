@@ -2,6 +2,7 @@ orbs:
   flog: hparker/flog@0.0.2
   flay: hparker/flay@0.0.2
   reek: hparker/reek@0.0.2
+  debride: hparker/debride@0.0.1
 
 version: 2.1
 
@@ -15,4 +16,5 @@ workflows:
     - flog/flog
     - flay/flay
     - reek/reek
+    - debride/debride
   version: 2
